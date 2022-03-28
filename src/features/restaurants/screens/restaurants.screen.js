@@ -3,9 +3,13 @@ import { Searchbar } from 'react-native-paper'
 import { RestaurantInfoCard } from '../components/restaurant-info.component';
 import styled from "styled-components/native";
 
+// ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
+// untuk ngatasin ios karena tidak support syntax ini margin-top: ${StatusBar.currentHeight}px;
+// syntax ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`}; ngecek
+// jika statusBar.currenHeight memiliki value, maka add marginTop
 const SafeArea = styled(SafeAreaView)`
     flex: 1;
-    margin-top: ${StatusBar.currentHeight}px;
+    ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 `;
 
 const SearchContainer = styled.View`
