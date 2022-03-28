@@ -1,10 +1,14 @@
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
-import { RestarantScreen } from './src/features/restaurants/screens/restaurants.screen';
+import { RestaurantScreen } from './src/features/restaurants/screens/restaurants.screen';
+import { ThemeProvider } from "styled-components/native";
+import { theme } from "./src/infrastructure/theme";
 
 export default function App() {
   return (
     <>
-      <RestarantScreen />
+      <ThemeProvider theme={theme}>
+        <RestaurantScreen />
+      </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
   );
