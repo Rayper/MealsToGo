@@ -1,6 +1,22 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 import { Card } from "react-native-paper";
+import styled from 'styled-components/native'
+
+// styled component menggunakan syntax css yang ditranslate menjadi styling pada react native
+// oleh karena itu, jika menggunakan pixeling maka harus assign px nya
+const RestaurantCard = styled(Card)`
+    backgroundColor: white;
+`;
+
+const RestaurantCardCover = styled(Card.Cover)`
+    padding: 20px;
+    backgroundColor: white;
+`;
+
+const Title = styled.Text`
+    padding: 16px;
+`;
 
 // create props restaurant untuk dipakai pada restaurantscreen
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
@@ -14,10 +30,10 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     } = restaurant;
     
     return (
-        <Card elevation={5} style={styles.card}>
-            <Card.Cover key={name} style={styles.cover} source={{ uri: photos[0] }} />
-            <Text style={styles.title}>{name}</Text>
-        </Card>
+        <RestaurantCard elevation={5} style={styles.card}>
+            <RestaurantCardCover key={name} style={styles.cover} source={{ uri: photos[0] }} />
+            <Title>{name}</Title>
+        </RestaurantCard>
     );
 }
 
