@@ -6,16 +6,16 @@ import styled from 'styled-components/native'
 // styled component menggunakan syntax css yang ditranslate menjadi styling pada react native
 // oleh karena itu, jika menggunakan pixeling maka harus assign px nya
 const RestaurantCard = styled(Card)`
-    backgroundColor: white;
+    backgroundColor: ${(props) => props.theme.colors.bg.primary};
 `;
 
 const RestaurantCardCover = styled(Card.Cover)`
-    padding: 20px;
-    backgroundColor: white;
+    padding: ${(props) => props.theme.space[3]};
+    backgroundColor: ${(props) => props.theme.colors.bg.primary};
 `;
 
 const Title = styled.Text`
-    padding: 16px;
+    padding: ${(props) => props.theme.space[3]};
     color: ${(props) => props.theme.colors.ui.success}
 `;
 
