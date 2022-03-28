@@ -23,7 +23,7 @@ const RestaurantListContainer = styled.View`
     background-color: #6cb221;
 `;
 
-export const RestarantScreen = () => (
+export const RestaurantScreen = () => (
     <SafeArea>
         <SearchContainer >
             <Searchbar />

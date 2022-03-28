@@ -16,6 +16,7 @@ const RestaurantCardCover = styled(Card.Cover)`
 
 const Title = styled.Text`
     padding: 16px;
+    color: ${(props) => props.theme.colors.ui.success}
 `;
 
 // create props restaurant untuk dipakai pada restaurantscreen
@@ -30,15 +31,9 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     } = restaurant;
     
     return (
-        <RestaurantCard elevation={5} style={styles.card}>
-            <RestaurantCardCover key={name} style={styles.cover} source={{ uri: photos[0] }} />
+        <RestaurantCard elevation={5}>
+            <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
             <Title>{name}</Title>
         </RestaurantCard>
     );
 }
-
-const styles = StyleSheet.create({
-    card: { backgroundColor: "white" },
-    cover: { padding: 20, backgroundColor: "white" },
-    title: { padding: 16, justifyContent: 'center' },
-});
