@@ -16,6 +16,8 @@ export const colors = {
     bg: {
         primary: "#FFFFFF",
         secondary: "#F1F1F1",
+        restaurant: "#7cce23",
+        list: "#6cb221"
     },
     text: {
         primary: "#262626",
