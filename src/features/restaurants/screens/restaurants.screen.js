@@ -1,9 +1,9 @@
 import { FlatList } from 'react-native';
 import { Searchbar } from 'react-native-paper'
 import styled from "styled-components/native";
+
 import { RestaurantInfoCard } from '../components/restaurant-info.component';
 import { Spacer } from "../../../components/spacer/spacer.component";
-
 import { SafeArea } from "../../../components/utility/safe-area.component"
 
 // ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
@@ -17,14 +17,14 @@ import { SafeArea } from "../../../components/utility/safe-area.component"
 // `;
 
 const SearchContainer = styled.View`
-    padding: ${(props) => props.theme.space[4]};
+    padding: ${(props) => props.theme.space[3]};
     backgroundColor: ${(props) => props.theme.colors.bg.restaurant};
 `;
 
 // attrs adalah function attributes yang memungkinkan kita mengakses spesifik props untuk default FlatList
 const RestaurantList = styled(FlatList).attrs({
     contentContainerStyle: {
-    padding: 20,
+    padding: 16,
     backgroundColor: "#6cb221"
     },
 })``;
