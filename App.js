@@ -13,6 +13,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { SafeArea } from './src/components/utility/safe-area.component';
 
+import { restaurantsRequest } from "./src/services/restaurants/restaurants.services"
+
 const Tab = createBottomTabNavigator();
 
 const TAB_ICONS = {
@@ -54,12 +56,6 @@ export default function App() {
     return {
       activeTintColor: "#6cb221",
       inactiveTintColor: "darkgrey",
-      // tabBarStyle: [
-      //   {
-      //     display: "flex"
-      //   }
-      // ],
-      // headrShown: false,
       tabBarIcon: ({size, color}) =>(
         <Ionicons name={iconName} size={size} color={color} />
       )
