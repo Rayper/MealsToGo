@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { useFonts as useOswald, Oswald_400Regular } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+
 import { Ionicons } from "@expo/vector-icons";
 
 import { SafeArea } from './src/components/utility/safe-area.component';
@@ -54,8 +55,8 @@ export default function App() {
   const createScreenOptions = ({route}) => {
     const iconName = TAB_ICONS[route.name]
     return {
-      activeTintColor: "#6cb221",
-      inactiveTintColor: "darkgrey",
+      tabBarActiveTintColor: "#6cb221",
+      tabBarInactiveTintColor: "darkgrey",
       tabBarIcon: ({size, color}) =>(
         <Ionicons name={iconName} size={size} color={color} />
       )

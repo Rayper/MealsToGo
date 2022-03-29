@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { FlatList } from 'react-native';
-import { Searchbar } from 'react-native-paper'
+import { ActivityIndicator, Colors, Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 
 import { RestaurantInfoCard } from '../components/restaurant-info.component';
@@ -8,6 +8,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component"
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context"
+
 
 // ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 // untuk ngatasin ios karena tidak support syntax ini margin-top: ${StatusBar.currentHeight}px;
@@ -32,13 +33,29 @@ const RestaurantList = styled(FlatList).attrs({
     },
 })``;
 
+// margin-left supaya ke tengah karena di Loading sudah set sizenya 50
+const Loading = styled(ActivityIndicator)`
+    margin-left: -25px;
+`;
+const LoadingContainer = styled.View`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+`;
+
 // contentContainerStyle => apply styling supaya bisa discroll
 export const RestaurantScreen = () => {
     // pakai resto context disini
+    // tambahkan props isLoading, error, dan restaurants
     const { isLoading, error, restaurants } = useContext(RestaurantsContext);
-    // console.log(restaurantContext);
+    console.log(error);
     return (
         <SafeArea>
+            {isLoading && (
+                <LoadingContainer>
+                <Loading size={50} animating={true} color="#7cce23" />
+                </LoadingContainer>
+            )}
             <SearchContainer >
                 <Searchbar />
             </SearchContainer>
