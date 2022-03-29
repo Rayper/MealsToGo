@@ -2,16 +2,24 @@ import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { RestaurantScreen } from './src/features/restaurants/screens/restaurants.screen';
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
-import { useFonts as useOswald, Oswald_400Regular } from "@expo-google-fonts/oswald";
-import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { Text } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import { useFonts as useOswald, Oswald_400Regular } from "@expo-google-fonts/oswald";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+import { Ionicons } from "@expo/vector-icons";
+
 import { SafeArea } from './src/components/utility/safe-area.component';
 
 const Tab = createBottomTabNavigator();
+
+const TAB_ICONS = {
+  Restaurants: "md-restaurant",
+  Map: "md-map",
+  Settings: "md-settings",
+};
 
 const Settings = () => (
   <SafeArea>
@@ -41,14 +49,31 @@ export default function App() {
     return null;
   }
 
+  const createScreenOptions = ({route}) => {
+    const iconName = TAB_ICONS[route.name]
+    return {
+      activeTintColor: "#6cb221",
+      inactiveTintColor: "darkgrey",
+      // tabBarStyle: [
+      //   {
+      //     display: "flex"
+      //   }
+      // ],
+      // headrShown: false,
+      tabBarIcon: ({size, color}) =>(
+        <Ionicons name={iconName} size={size} color={color} />
+      )
+    }
+  }
+
   return (
     <>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
-          <Tab.Navigator>
-            <Tab.Screen name='Restaurants' component={RestaurantScreen} />
+          <Tab.Navigator screenOptions={createScreenOptions}>
+            <Tab.Screen name='Restaurants' component={RestaurantScreen} options={{ tabBarBadge: 1 }} />
             <Tab.Screen name='Map' component={Map} />
-            <Tab.Screen name='Settings' component={Settings} />
+            <Tab.Screen name='Settings' component={Settings} options={{ tabBarBadge: 2 }}/>
           </Tab.Navigator>
         </NavigationContainer>
       </ThemeProvider>
