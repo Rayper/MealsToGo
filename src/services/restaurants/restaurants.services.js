@@ -12,16 +12,16 @@ export const restaurantsRequest = (location = "41.878113,-87.629799") => {
     });
     };
 
-    const restaurantsTransform = ({ results = [] }) => {
-        const mappedResults = results.map((restaurant) => {
-            return {
-                ...restaurant,
-                isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,
-                isClosedTemporarily: restaurant.business_status === "CLOSED_TEMPORARILY",
-            };
-            });
-            return camelize(mappedResults);
+export const restaurantsTransform = ({ results = [] }) => {
+    const mappedResults = results.map((restaurant) => {
+        return {
+            ...restaurant,
+            isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,
+            isClosedTemporarily: restaurant.business_status === "CLOSED_TEMPORARILY",
         };
+        });
+        return camelize(mappedResults);
+    };
 
     restaurantsRequest()
     // tangkep value dari function resto transform

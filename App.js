@@ -13,7 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { SafeArea } from './src/components/utility/safe-area.component';
 
-import { restaurantsRequest } from "./src/services/restaurants/restaurants.services"
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context"
 
 const Tab = createBottomTabNavigator();
 
@@ -65,13 +65,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator screenOptions={createScreenOptions}>
-            <Tab.Screen name='Restaurants' component={RestaurantScreen} options={{ tabBarBadge: 1 }} />
-            <Tab.Screen name='Map' component={Map} />
-            <Tab.Screen name='Settings' component={Settings} options={{ tabBarBadge: 2 }}/>
-          </Tab.Navigator>
-        </NavigationContainer>
+        <RestaurantsContextProvider>
+          <NavigationContainer>
+            <Tab.Navigator screenOptions={createScreenOptions}>
+              <Tab.Screen name='Restaurants' component={RestaurantScreen} options={{ tabBarBadge: 1 }} />
+              <Tab.Screen name='Map' component={Map} />
+              <Tab.Screen name='Settings' component={Settings} options={{ tabBarBadge: 2 }}/>
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantsContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
