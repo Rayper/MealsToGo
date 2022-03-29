@@ -13,6 +13,7 @@ export const restaurantsRequest = (location = "41.878113,-87.629799") => {
     };
 
 export const restaurantsTransform = ({ results = [] }) => {
+    
     const mappedResults = results.map((restaurant) => {
         
         restaurant.photos = restaurant.photos.map((p) => {
@@ -25,9 +26,9 @@ export const restaurantsTransform = ({ results = [] }) => {
             isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,
             isClosedTemporarily: restaurant.business_status === "CLOSED_TEMPORARILY",
         };
-        });
-        return camelize(mappedResults);
-    };
+    });
+    return camelize(mappedResults);
+};
 
     restaurantsRequest()
     // tangkep value dari function resto transform
