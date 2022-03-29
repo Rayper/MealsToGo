@@ -35,20 +35,24 @@ const RestaurantList = styled(FlatList).attrs({
 // contentContainerStyle => apply styling supaya bisa discroll
 export const RestaurantScreen = () => {
     // pakai resto context disini
-    const restaurantContext = useContext(RestaurantsContext);
-    console.log(restaurantContext);
+    const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+    // console.log(restaurantContext);
     return (
         <SafeArea>
             <SearchContainer >
                 <Searchbar />
             </SearchContainer>
             <RestaurantList 
-                data={restaurantContext.restaurants}
-                renderItem={() => 
-                    <Spacer position="bottom" size="small">
-                        <RestaurantInfoCard />
-                    </Spacer> 
-                }
+                data={restaurants}
+                renderItem={({ item }) => {
+                    console.log(item);
+                    return (
+                        <Spacer position="bottom" size="small">
+                            <RestaurantInfoCard restaurant={item} />
+                        </Spacer> 
+                    );
+                }}
+                // ini assign item.name sebagai key
                 keyExtractor={(item) => item.name}
             />
         </SafeArea>
