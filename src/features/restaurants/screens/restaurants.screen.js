@@ -44,7 +44,6 @@ export const RestaurantScreen = () => {
     // pakai resto context disini
     // tambahkan props isLoading, error, dan restaurants
     const { isLoading, error, restaurants } = useContext(RestaurantsContext);
-    console.log(error);
     return (
         <SafeArea>
             {isLoading && (

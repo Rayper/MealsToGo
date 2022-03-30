@@ -1,4 +1,6 @@
-import React, { useState, createContext, useEffect, useMemo } from 'react'
+import React, { useState, createContext, useEffect, useMemo, useContext } from 'react'
+
+import { LocationContext } from '../location/location.context';
 
 import { restaurantsRequest, restaurantsTransform } from './restaurants.services'
 
@@ -9,12 +11,15 @@ export const RestaurantsContextProvider = ({ children }) => {
     //  by default isLoadingnya false
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const { location } = useContext(LocationContext);
 
-    const retrieveRestaurants = () => {
+    const retrieveRestaurants = (loc) => {
         // loading selama 2 detik
         setIsLoading(true);
+        // setiap kali retrieve resto, kita balikin setResto menjadi array kosong untuk searchig resto selanjutnya
+        setRestaurants([]);
         setTimeout(() => {
-            restaurantsRequest()
+            restaurantsRequest(loc)
             .then(restaurantsTransform)
             .then((results) => {
                 setIsLoading(false);
@@ -28,8 +33,13 @@ export const RestaurantsContextProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        retrieveRestaurants();
-    }, []);
+        // jika ada locationya
+        if(location) {
+            console.log(location); 
+            const locationString = `${location.lat},${location.lng}`;
+            retrieveRestaurants(locationString);
+        }
+    }, [location]);
 
 
     return (
