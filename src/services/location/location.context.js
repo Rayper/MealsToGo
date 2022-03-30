@@ -9,17 +9,21 @@ export const LocationContextProvider = ({ children }) => {
     const [location, setLocation] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [keyword, setKeyword] = useState("San Francisco");
+    const [keyword, setKeyword] = useState("Chicago");
 
     const onSearch = (searchKeyword) => {
         setIsLoading(true);
         setKeyword(searchKeyword);
+    }
+
+    // trigger ketika keyword berubah
+    useEffect(() => {
         // jika tidak ada text, do nothing
-        if(!searchKeyword.length) {
+        if(!keyword.length) {
             return;
         }
         // jadiin lowercase supaya mudah pas searchingnya
-        locationRequest(searchKeyword.toLowerCase())
+        locationRequest(keyword.toLowerCase())
         .then(locationTransform)
         .then((result) => {
             setIsLoading(false);
@@ -29,7 +33,7 @@ export const LocationContextProvider = ({ children }) => {
             setIsLoading(false);
             setError(err);
         })
-    }
+    }, [keyword]);
 
     return (
         <LocationContext.Provider 
