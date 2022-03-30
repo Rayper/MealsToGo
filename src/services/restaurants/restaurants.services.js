@@ -30,13 +30,13 @@ export const restaurantsTransform = ({ results = [] }) => {
     return camelize(mappedResults);
 };
 
-    restaurantsRequest()
-    // tangkep value dari function resto transform
-    .then(restaurantsTransform)
-    // assign ke variable trasnformedResponse
-    .then((transformedResponse) => {
-        console.log(transformedResponse);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+    // restaurantsRequest()
+    // // tangkep value dari function resto transform
+    // .then(restaurantsTransform)
+    // // assign ke variable trasnformedResponse
+    // .then((transformedResponse) => {
+    //     console.log(transformedResponse);
+    // })
+    // .catch((err) => {
+    //     console.log(err);
+    // });

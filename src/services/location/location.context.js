@@ -9,12 +9,15 @@ export const LocationContextProvider = ({ children }) => {
     const [location, setLocation] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [keyword, setKeyword] = useState("san francisco");
+    const [keyword, setKeyword] = useState("San Francisco");
 
     const onSearch = (searchKeyword) => {
-        console.log(searchKeyword);
         setIsLoading(true);
         setKeyword(searchKeyword);
+        // jika tidak ada text, do nothing
+        if(!searchKeyword.length) {
+            return;
+        }
         // jadiin lowercase supaya mudah pas searchingnya
         locationRequest(searchKeyword.toLowerCase())
         .then(locationTransform)
@@ -26,12 +29,9 @@ export const LocationContextProvider = ({ children }) => {
         .catch((err) => {
             setIsLoading(false);
             setError(err);
+            console.log(err);
         })
     }
-
-    useEffect(() => {
-        onSearch(keyword)
-    }, []);
 
     return (
         <LocationContext.Provider 
