@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FlatList, Pressable } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { ActivityIndicator, Colors, Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 
@@ -56,11 +56,11 @@ export const RestaurantScreen = ({ navigation }) => {
                 data={restaurants}
                 renderItem={({ item }) => {
                     return (
-                        <Pressable onPress={() => navigation.navigate("RestaurantDetail")}>
+                        <TouchableOpacity onPress={() => navigation.navigate("RestaurantDetail")}>
                             <Spacer position="bottom" size="large">
                                 <RestaurantInfoCard restaurant={item} />
                             </Spacer>
-                        </Pressable>
+                        </TouchableOpacity>
                     );
                 }}
                 // ini assign item.name sebagai key
