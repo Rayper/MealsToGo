@@ -1,18 +1,22 @@
 import React from 'react'
 
 import { createStackNavigator } from '@react-navigation/stack'
-
+import { Text } from 'react-native';
 import { RestaurantScreen } from "../../features/restaurants/screens/restaurants.screen";
 
-const RestaruantStack = createStackNavigator();
+const RestaurantStack = createStackNavigator();
 
 export const RestaurantsNavigator = () => {
     return (
-        <RestaruantStack.Navigator headerMode="none">
-            <RestaruantStack.Screen 
+        <RestaurantStack.Navigator headerMode="none">
+            <RestaurantStack.Screen 
                 name="Restaurants List"
                 component={RestaurantScreen}
             />
-        </RestaruantStack.Navigator>
+            <RestaurantStack.Screen
+                name="RestaurantDetail"
+                component={() => <Text>Restaurant Detail</Text>}
+            />
+        </RestaurantStack.Navigator>
     )
 }

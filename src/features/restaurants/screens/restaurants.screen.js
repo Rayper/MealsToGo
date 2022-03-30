@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FlatList } from 'react-native';
+import { FlatList, Pressable } from 'react-native';
 import { ActivityIndicator, Colors, Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 
@@ -39,7 +39,8 @@ const LoadingContainer = styled.View`
 `;
 
 // contentContainerStyle => apply styling supaya bisa discroll
-export const RestaurantScreen = () => {
+export const RestaurantScreen = ({ navigation }) => {
+    console.log(navigation);
     // pakai resto context disini
     // tambahkan props isLoading, error, dan restaurants
     const { isLoading, restaurants } = useContext(RestaurantsContext);
@@ -55,9 +56,11 @@ export const RestaurantScreen = () => {
                 data={restaurants}
                 renderItem={({ item }) => {
                     return (
-                        <Spacer position="bottom" size="small">
-                            <RestaurantInfoCard restaurant={item} />
-                        </Spacer> 
+                        <Pressable onPress={() => navigation.navigate("RestaurantDetail")}>
+                            <Spacer position="bottom" size="large">
+                                <RestaurantInfoCard restaurant={item} />
+                            </Spacer>
+                        </Pressable>
                     );
                 }}
                 // ini assign item.name sebagai key
