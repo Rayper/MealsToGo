@@ -1,8 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react'
 import { locationRequest, locationTransform } from './location.service'
 
-import {locations} from './location.mock'
-
 export const LocationContext = createContext();
 
 export const LocationContextProvider = ({ children }) => {
