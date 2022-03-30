@@ -17,26 +17,7 @@ import { SafeArea } from './src/components/utility/safe-area.component';
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context"
 import { LocationContextProvider } from './src/services/location/location.context'
 
-const Tab = createBottomTabNavigator();
-
-const TAB_ICONS = {
-  Restaurants: "md-restaurant",
-  Map: "md-map",
-  Settings: "md-settings",
-};
-
-const Settings = () => (
-  <SafeArea>
-    <Text>Settings</Text>
-  </SafeArea>
-);
-
-const Map = () => (
-  <SafeArea>
-    <Text>Map</Text>
-  </SafeArea>
-);
-
+import { Navigation } from './src/infrastructure/navigation';
 
 export default function App() {
   // untuk load si font oswald dan lato
@@ -53,29 +34,12 @@ export default function App() {
     return null;
   }
 
-  const createScreenOptions = ({route}) => {
-    const iconName = TAB_ICONS[route.name]
-    return {
-      tabBarActiveTintColor: "#6cb221",
-      tabBarInactiveTintColor: "darkgrey",
-      tabBarIcon: ({size, color}) =>(
-        <Ionicons name={iconName} size={size} color={color} />
-      )
-    }
-  }
-
   return (
     <>
       <ThemeProvider theme={theme}>
         <LocationContextProvider>
           <RestaurantsContextProvider>
-            <NavigationContainer>
-              <Tab.Navigator screenOptions={createScreenOptions}>
-                <Tab.Screen name='Restaurants' component={RestaurantScreen} options={{ tabBarBadge: 1 }} />
-                <Tab.Screen name='Map' component={Map} />
-                <Tab.Screen name='Settings' component={Settings} options={{ tabBarBadge: 2 }}/>
-              </Tab.Navigator>
-            </NavigationContainer>
+              <Navigation />
           </RestaurantsContextProvider>
         </LocationContextProvider>
       </ThemeProvider>
