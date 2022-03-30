@@ -4,6 +4,7 @@ import { ActivityIndicator, Colors, Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 
 import { RestaurantInfoCard } from '../components/restaurant-info.component';
+import { Search } from '../components/search.component';
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component"
 
@@ -19,11 +20,6 @@ import { RestaurantsContext } from "../../../services/restaurants/restaurants.co
 //     flex: 1;
 //     ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 // `;
-
-const SearchContainer = styled.View`
-    padding: ${(props) => props.theme.space[3]};
-    backgroundColor: ${(props) => props.theme.colors.bg.restaurant};
-`;
 
 // attrs adalah function attributes yang memungkinkan kita mengakses spesifik props untuk default FlatList
 const RestaurantList = styled(FlatList).attrs({
@@ -48,7 +44,6 @@ export const RestaurantScreen = () => {
     // pakai resto context disini
     // tambahkan props isLoading, error, dan restaurants
     const { isLoading, error, restaurants } = useContext(RestaurantsContext);
-    console.log(error);
     return (
         <SafeArea>
             {isLoading && (
@@ -56,13 +51,10 @@ export const RestaurantScreen = () => {
                 <Loading size={50} animating={true} color="#7cce23" />
                 </LoadingContainer>
             )}
-            <SearchContainer >
-                <Searchbar />
-            </SearchContainer>
+            <Search />
             <RestaurantList 
                 data={restaurants}
                 renderItem={({ item }) => {
-                    console.log(item);
                     return (
                         <Spacer position="bottom" size="small">
                             <RestaurantInfoCard restaurant={item} />
