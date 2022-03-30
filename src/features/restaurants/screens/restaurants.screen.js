@@ -10,7 +10,6 @@ import { SafeArea } from "../../../components/utility/safe-area.component"
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context"
 
-
 // ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 // untuk ngatasin ios karena tidak support syntax ini margin-top: ${StatusBar.currentHeight}px;
 // syntax ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`}; ngecek
@@ -48,7 +47,7 @@ export const RestaurantScreen = () => {
         <SafeArea>
             {isLoading && (
                 <LoadingContainer>
-                <Loading size={50} animating={true} color="#7cce23" />
+                    <Loading size={50} animating={true} color="#7cce23" />
                 </LoadingContainer>
             )}
             <Search />
