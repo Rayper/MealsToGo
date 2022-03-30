@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FlatList } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { ActivityIndicator, Colors, Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 
@@ -9,7 +9,6 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component"
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context"
-
 
 // ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 // untuk ngatasin ios karena tidak support syntax ini margin-top: ${StatusBar.currentHeight}px;
@@ -40,7 +39,8 @@ const LoadingContainer = styled.View`
 `;
 
 // contentContainerStyle => apply styling supaya bisa discroll
-export const RestaurantScreen = () => {
+export const RestaurantScreen = ({ navigation }) => {
+    console.log(navigation);
     // pakai resto context disini
     // tambahkan props isLoading, error, dan restaurants
     const { isLoading, restaurants } = useContext(RestaurantsContext);
@@ -48,7 +48,7 @@ export const RestaurantScreen = () => {
         <SafeArea>
             {isLoading && (
                 <LoadingContainer>
-                <Loading size={50} animating={true} color="#7cce23" />
+                    <Loading size={50} animating={true} color="#7cce23" />
                 </LoadingContainer>
             )}
             <Search />
@@ -56,9 +56,17 @@ export const RestaurantScreen = () => {
                 data={restaurants}
                 renderItem={({ item }) => {
                     return (
-                        <Spacer position="bottom" size="small">
-                            <RestaurantInfoCard restaurant={item} />
-                        </Spacer> 
+                        <TouchableOpacity 
+                            onPress={() =>
+                                navigation.navigate("RestaurantDetail", {
+                                restaurant: item,
+                                })
+                            }
+                        >
+                            <Spacer position="bottom" size="large">
+                                <RestaurantInfoCard restaurant={item} />
+                            </Spacer>
+                        </TouchableOpacity>
                     );
                 }}
                 // ini assign item.name sebagai key
