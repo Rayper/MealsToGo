@@ -12,16 +12,31 @@ const FavouriteButton = styled(TouchableOpacity)`
     z-index: 9;
 `;
 
-export const Favourite = () => {
-    const { favourites, addToFavourites, removeFromFavourites } = useContext(FavouritesContext)
+export const Favourite = ({ restaurant }) => {
+    const { favourites, addToFavourites, removeFromFavourites } = useContext(FavouritesContext);
     
+    // cek apakah resto tersebut adalah favourites
+    const isFavourites = favourites.find((r) => r.placeId === restaurant.placeId);
     return (
-        <FavouriteButton>
+        <FavouriteButton 
+            onPress={() =>
+                // jika bukan favourites, addToFavourites 
+                !isFavourites ?
+                addToFavourites(restaurant) :
+                removeFromFavourites(restaurant)}
+        
+        >
             <AntDesign 
-                name="heart"
+                name={
+                    // jika isFavourites true, pakai heart
+                    isFavourites ? "heart" : "hearto"
+                }
                 size={24}
-                color="red"
+                color={
+                    // jika isFavourites true, heartnya warna merah
+                    isFavourites ? "red" : "white"
+                }
             />
         </FavouriteButton>
-    )
-}
+    );
+};
