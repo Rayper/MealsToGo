@@ -9,6 +9,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component"
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context"
+import { FavouritesContext } from '../../../services/favourites/favourites.context';
 
 // ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 // untuk ngatasin ios karena tidak support syntax ini margin-top: ${StatusBar.currentHeight}px;
@@ -44,6 +45,9 @@ export const RestaurantScreen = ({ navigation }) => {
     // pakai resto context disini
     // tambahkan props isLoading, error, dan restaurants
     const { isLoading, restaurants } = useContext(RestaurantsContext);
+    const { favourites } = useContext(FavouritesContext);
+    console.log(favourites);
+
     return (
         <SafeArea>
             {isLoading && (

@@ -6,6 +6,7 @@ import open from "../../../../assets/open";
 import { Text } from '../../../components/typography/text.component';
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Icon, Info, Section, SectionEnd, Rating, Address, RestaurantCard, RestaurantCardCover } from './restaurant-info-styles'
+import { Favourite } from '../../../components/favourites/favourites.component';
 
 // styled component menggunakan syntax css yang ditranslate menjadi styling pada react native
 // oleh karena itu, jika menggunakan pixeling maka harus assign px nya
@@ -37,6 +38,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
 
     return (
         <RestaurantCard elevation={5}>
+            <Favourite />
             <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
             <Info>
                 <Text variant="label">{name}</Text>
