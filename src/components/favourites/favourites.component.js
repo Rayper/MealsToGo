@@ -33,7 +33,7 @@ export const Favourite = ({ restaurant }) => {
                 size={24}
                 color={
                     // jika isFavourites true, heartnya warna merah
-                    isFavourites ? "red" : "white"
+                    isFavourites ? "#7cce23" : "white"
                 }
             />
         </FavouriteButton>

@@ -6,7 +6,7 @@ import { LocationContext } from '../../../services/location/location.context'
 
 const SearchContainer = styled.View`
     padding: ${(props) => props.theme.space[3]};
-    backgroundColor: ${(props) => props.theme.colors.bg.restaurant};
+    backgroundColor: ${(props) => props.theme.colors.bg.list};
 `;
 
 export const Search = ({ isFavouritesToggled, onFavouritesToggle }) => {
@@ -21,6 +21,7 @@ export const Search = ({ isFavouritesToggled, onFavouritesToggle }) => {
         <SearchContainer >
             <Searchbar 
                 icon={isFavouritesToggled ? "heart" : "heart-outline"}
+                iconColor="#7cce23"
                 onIconPress={onFavouritesToggle}
                 placeholder='Search for a location'
                 value={searchKeyword}
