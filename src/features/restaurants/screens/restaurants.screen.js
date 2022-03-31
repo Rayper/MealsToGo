@@ -40,7 +40,7 @@ const LoadingContainer = styled.View`
 
 // contentContainerStyle => apply styling supaya bisa discroll
 export const RestaurantScreen = ({ navigation }) => {
-    console.log(navigation);
+    // console.log(navigation);
     // pakai resto context disini
     // tambahkan props isLoading, error, dan restaurants
     const { isLoading, restaurants } = useContext(RestaurantsContext);
