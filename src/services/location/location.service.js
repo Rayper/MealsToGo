@@ -23,5 +23,5 @@ export const locationTransform = (result) => {
     // ambil data lat dan lng nya
     const { lat, lng } = geometry.location;
 
-    return { lat, lng };
+    return { lat, lng, viewport: geometry.viewport };
 };
