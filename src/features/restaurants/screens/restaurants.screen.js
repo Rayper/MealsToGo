@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { FlatList, TouchableOpacity } from 'react-native';
 import { ActivityIndicator, Colors, Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
@@ -9,8 +9,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component"
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context"
-import { FavouritesContext } from '../../../services/favourites/favourites.context';
-
+import { FavouritesBar } from '../../../components/favourites/favourites-bar'
 // ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 // untuk ngatasin ios karena tidak support syntax ini margin-top: ${StatusBar.currentHeight}px;
 // syntax ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`}; ngecek
@@ -39,14 +38,15 @@ const LoadingContainer = styled.View`
     left: 50%;
 `;
 
+// <Search isFavouritesToggled={isToggled}  onToggle={() => setIsToggled(!isToggled)} />
+// set isToggled jadi true tiap kali dipencet
 // contentContainerStyle => apply styling supaya bisa discroll
 export const RestaurantScreen = ({ navigation }) => {
     // console.log(navigation);
     // pakai resto context disini
     // tambahkan props isLoading, error, dan restaurants
     const { isLoading, restaurants } = useContext(RestaurantsContext);
-    const { favourites } = useContext(FavouritesContext);
-    console.log(favourites);
+    const [isToggled, setIsToggled] = useState(false);
 
     return (
         <SafeArea>
@@ -55,7 +55,11 @@ export const RestaurantScreen = ({ navigation }) => {
                     <Loading size={50} animating={true} color="#7cce23" />
                 </LoadingContainer>
             )}
-            <Search />
+            <Search 
+                isFavouritesToggled={isToggled}
+                onFavouritesToggle={() => setIsToggled(!isToggled)}
+            />
+            {isToggled && <FavouritesBar />}
             <RestaurantList 
                 data={restaurants}
                 renderItem={({ item }) => {

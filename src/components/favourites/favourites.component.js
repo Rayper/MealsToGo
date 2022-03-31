@@ -7,8 +7,8 @@ import { FavouritesContext } from '../../services/favourites/favourites.context'
 // z-index: 9 -> supaya pop di top
 const FavouriteButton = styled(TouchableOpacity)`
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 22px;
+    right: 22px;
     z-index: 9;
 `;
 
@@ -24,7 +24,6 @@ export const Favourite = ({ restaurant }) => {
                 !isFavourites ?
                 addToFavourites(restaurant) :
                 removeFromFavourites(restaurant)}
-        
         >
             <AntDesign 
                 name={
