@@ -21,7 +21,7 @@ export const MapScreen = ({ navigation }) => {
     
     // dapet dari location service
     const { lat, lng, viewport } = location;
-    console.log(viewport);
+    console.log("viewport : ", viewport);
 
     // untuk ngasih tau lokasi mana yang akan difokuskan / dapetin lokasi region-nya
     useEffect(() => {
