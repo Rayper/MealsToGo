@@ -9,6 +9,16 @@ export const AuthenticationContextProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [error, setError] = useState(null)
 
+    // cek apakah ada session
+    firebase.auth().onAuthStateChanged((usr) => {
+        if(usr){
+            setUser(usr);
+            // setIsLoading(false);
+        }else{
+            // setIsLoading(false);
+        }
+    })
+
     const onLogin = (email, password) => {
         // pertama kali onlogin dipencet, akan jalankan loading
         setIsLoading(true);
@@ -23,6 +33,7 @@ export const AuthenticationContextProvider = ({ children }) => {
     };
 
     const onRegister = (email, password, repeatedpassword) => {
+        setIsLoading(true)
         if(password !== repeatedpassword) {
             setError("Error: Password do not match");
             return
@@ -37,18 +48,24 @@ export const AuthenticationContextProvider = ({ children }) => {
         });
     };
 
+    const onLogout = () => {
+        setUser(null);
+        firebase.auth().signOut();
+    }
+
     return(
-        <AuthenticationContext.Provider 
-            value={{ 
-                // kalau ada usernya, jadi true 
-                isAuthenticated: !!user,
-                user,
-                isLoading,
-                error,
-                onLogin,
-                onRegister
-            }}
-        >
+            <AuthenticationContext.Provider 
+                value={{ 
+                    // kalau ada usernya, jadi true 
+                    isAuthenticated: !!user,
+                    user,
+                    isLoading,
+                    error,
+                    onLogin,
+                    onRegister,
+                    onLogout
+                }}
+            >
             {children}
         </AuthenticationContext.Provider>
     )

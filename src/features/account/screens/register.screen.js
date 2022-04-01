@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { ActivityIndicator, Colors } from 'react-native-paper'
 
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -11,7 +12,7 @@ export const RegisterScreen = ({ navigation }) => {
     const [password, setPassword] = useState("");
     const [repeatedpassword, setRepeatedPassword] = useState("");
 
-    const { onRegister, error } = useContext(AuthenticationContext);
+    const { onRegister, isLoading, error } = useContext(AuthenticationContext);
 
     return (
         <AccountBackground>
@@ -62,6 +63,7 @@ export const RegisterScreen = ({ navigation }) => {
                 )}
 
                 <Spacer size="large">
+                    { !isLoading ? ( 
                     <AuthButton
                         icon="email"
                         mode="contained"
@@ -69,7 +71,9 @@ export const RegisterScreen = ({ navigation }) => {
                         onPress={() => onRegister(email, password, repeatedpassword)}
                     >
                         Register    
-                    </AuthButton>
+                    </AuthButton> ) : (
+                        <ActivityIndicator animating={true} color="#7cce23" />
+                    )}
                 </Spacer>
 
             </AccountContainer>
