@@ -1,16 +1,19 @@
 import React, { useContext, useState } from 'react'
-import { FlatList, TouchableOpacity } from 'react-native';
-import { ActivityIndicator, Colors, Searchbar } from "react-native-paper";
+import { TouchableOpacity } from 'react-native';
+import { ActivityIndicator } from "react-native-paper";
 import styled from "styled-components/native";
 
 import { RestaurantInfoCard } from '../components/restaurant-info.component';
 import { Search } from '../components/search.component';
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component"
+import { FavouritesBar } from '../../../components/favourites/favourites-bar'
+import { RestaurantList } from "../components/restaurants-list.style";
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context"
 import { FavouritesContext } from '../../../services/favourites/favourites.context'
-import { FavouritesBar } from '../../../components/favourites/favourites-bar'
+
 // ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 // untuk ngatasin ios karena tidak support syntax ini margin-top: ${StatusBar.currentHeight}px;
 // syntax ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`}; ngecek
@@ -20,14 +23,7 @@ import { FavouritesBar } from '../../../components/favourites/favourites-bar'
 //     flex: 1;
 //     ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 // `;
-
 // attrs adalah function attributes yang memungkinkan kita mengakses spesifik props untuk default FlatList
-const RestaurantList = styled(FlatList).attrs({
-    contentContainerStyle: {
-    padding: 16,
-    backgroundColor: "#6cb221"
-    },
-})``;
 
 // margin-left supaya ke tengah karena di Loading sudah set sizenya 50
 const Loading = styled(ActivityIndicator)`
@@ -74,7 +70,9 @@ export const RestaurantScreen = ({ navigation }) => {
                             }
                         >
                             <Spacer position="bottom" size="large">
+                            <FadeInView>
                                 <RestaurantInfoCard restaurant={item} />
+                            </FadeInView>
                             </Spacer>
                         </TouchableOpacity>
                     );
