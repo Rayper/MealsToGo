@@ -11,6 +11,8 @@ import { SafeArea } from "../../../components/utility/safe-area.component"
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context"
 import { FavouritesContext } from '../../../services/favourites/favourites.context'
 import { FavouritesBar } from '../../../components/favourites/favourites-bar'
+
+import { RestaurantList } from "../components/restaurants-list.style";
 // ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 // untuk ngatasin ios karena tidak support syntax ini margin-top: ${StatusBar.currentHeight}px;
 // syntax ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`}; ngecek
@@ -20,14 +22,7 @@ import { FavouritesBar } from '../../../components/favourites/favourites-bar'
 //     flex: 1;
 //     ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 // `;
-
 // attrs adalah function attributes yang memungkinkan kita mengakses spesifik props untuk default FlatList
-const RestaurantList = styled(FlatList).attrs({
-    contentContainerStyle: {
-    padding: 16,
-    backgroundColor: "#6cb221"
-    },
-})``;
 
 // margin-left supaya ke tengah karena di Loading sudah set sizenya 50
 const Loading = styled(ActivityIndicator)`
