@@ -12,7 +12,8 @@ export const AuthenticationContextProvider = ({ children }) => {
     const onLogin = (email, password) => {
         // pertama kali onlogin dipencet, akan jalankan loading
         setIsLoading(true);
-        loginRequest(email, password).then((u) => {
+        loginRequest(email, password).
+        then((u) => {
             setUser(u);
             setIsLoading(false);
         }).catch((e) => {
@@ -21,13 +22,31 @@ export const AuthenticationContextProvider = ({ children }) => {
         })
     };
 
+    const onRegister = (email, password, repeatedpassword) => {
+        if(password !== repeatedpassword) {
+            setError("Error: Password do not match");
+            return
+        }
+        firebase.auth().createUserWithEmailAndPassword(email, password).
+        then((u) => {
+            setUser(u);
+            setIsLoading(false);
+        }).catch((e) => {
+            setIsLoading(false);
+            setError(e.toString());
+        });
+    };
+
     return(
         <AuthenticationContext.Provider 
             value={{ 
+                // kalau ada usernya, jadi true 
+                isAuthenticated: !!user,
                 user,
                 isLoading,
                 error,
-                onLogin
+                onLogin,
+                onRegister
             }}
         >
             {children}

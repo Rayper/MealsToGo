@@ -35,7 +35,6 @@ export const LoginScreen = ({ navigation }) => {
                         // biar jadi bulet2
                         secureTextEntry
                         autoCapitalize="none"
-                        secure
                         // setPasswordnya disini
                         onChangeText={(p) => setPassword(p)}
                     />

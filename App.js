@@ -32,24 +32,6 @@ if(!firebase.apps.length){
 }
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // cek apakah sudah connect dengan firebase
-  useEffect(() => {
-    setTimeout(() => {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword("test@email.com", "test123")
-        .then((user) => {
-          console.log(user);
-          setIsAuthenticated(true);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-      }, 2000);
-  }, []); 
-
   // untuk load si font oswald dan lato
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
