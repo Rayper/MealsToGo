@@ -10,12 +10,11 @@ import { RestaurantsContextProvider } from "./src/services/restaurants/restauran
 import { LocationContextProvider } from './src/services/location/location.context'
 import { FavouritesContextProvider } from './src/services/favourites/favourites.context';
 
-import { Navigation } from './src/infrastructure/navigation';
 import { theme } from "./src/infrastructure/theme";
 
-import { initializeApp } from 'firebase/app';
 import firebase from 'firebase/compat';
 import { AuthenticationContextProvider } from './src/services/authentication/authentication.context';
+import { Navigation }  from './src/infrastructure/navigation/index';
 
 
 // Initialize Firebase
