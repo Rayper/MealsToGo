@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { ThemeProvider } from "styled-components/native";
 import 'react-native-gesture-handler';
 
 import { useFonts as useOswald, Oswald_400Regular } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
-
-import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context"
-import { LocationContextProvider } from './src/services/location/location.context'
-import { FavouritesContextProvider } from './src/services/favourites/favourites.context';
 
 import { theme } from "./src/infrastructure/theme";
 
@@ -32,24 +28,6 @@ if(!firebase.apps.length){
 }
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // cek apakah sudah connect dengan firebase
-  useEffect(() => {
-    setTimeout(() => {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword("test@email.com", "test123")
-        .then((user) => {
-          console.log(user);
-          setIsAuthenticated(true);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-      }, 2000);
-  }, []); 
-
   // untuk load si font oswald dan lato
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -68,13 +46,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantsContextProvider>
-                <Navigation />
-              </RestaurantsContextProvider>
-            </LocationContextProvider>
-          </FavouritesContextProvider>
+          <Navigation />
         </AuthenticationContextProvider>  
       </ThemeProvider>
       <ExpoStatusBar style="auto" />

@@ -9,10 +9,21 @@ export const AuthenticationContextProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [error, setError] = useState(null)
 
+    // cek apakah ada session
+    firebase.auth().onAuthStateChanged((usr) => {
+        if(usr){
+            setUser(usr);
+            // setIsLoading(false);
+        }else{
+            // setIsLoading(false);
+        }
+    })
+
     const onLogin = (email, password) => {
         // pertama kali onlogin dipencet, akan jalankan loading
         setIsLoading(true);
-        loginRequest(email, password).then((u) => {
+        loginRequest(email, password).
+        then((u) => {
             setUser(u);
             setIsLoading(false);
         }).catch((e) => {
@@ -21,15 +32,40 @@ export const AuthenticationContextProvider = ({ children }) => {
         })
     };
 
+    const onRegister = (email, password, repeatedpassword) => {
+        setIsLoading(true)
+        if(password !== repeatedpassword) {
+            setError("Error: Password do not match");
+            return
+        }
+        firebase.auth().createUserWithEmailAndPassword(email, password).
+        then((u) => {
+            setUser(u);
+            setIsLoading(false);
+        }).catch((e) => {
+            setIsLoading(false);
+            setError(e.toString());
+        });
+    };
+
+    const onLogout = () => {
+        setUser(null);
+        firebase.auth().signOut();
+    }
+
     return(
-        <AuthenticationContext.Provider 
-            value={{ 
-                user,
-                isLoading,
-                error,
-                onLogin
-            }}
-        >
+            <AuthenticationContext.Provider 
+                value={{ 
+                    // kalau ada usernya, jadi true 
+                    isAuthenticated: !!user,
+                    user,
+                    isLoading,
+                    error,
+                    onLogin,
+                    onRegister,
+                    onLogout
+                }}
+            >
             {children}
         </AuthenticationContext.Provider>
     )
