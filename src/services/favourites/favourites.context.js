@@ -1,27 +1,29 @@
-import React, { useState, createContext, useEffect } from 'react'
+import React, { useState, createContext, useEffect, useContext } from 'react'
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthenticationContext } from '../../services/authentication/authentication.context'
 
 
 export const FavouritesContext = createContext();
 
 export const FavouritesContextProvider = ({ children }) => {
+    const { user } = useContext(AuthenticationContext);
     // create state untuk favourites
     const [favourites, setFavourites] = useState([]);
-
+    
     // function untuk store favourites restonya
-    const saveFavourites = async (value) => {
+    const saveFavourites = async (value, uid) => {
         try {
             const jsonValue = JSON.stringify(value)
-            await AsyncStorage.setItem('@favourites', jsonValue)
+            await AsyncStorage.setItem(`@favourites-${uid}`, jsonValue)
             } catch (e) {
                 console.log('error storing : ', e);
             }
         }
 
     // ini buat get datanya
-    const loadFavourites = async () => {
+    const loadFavourites = async (uid) => {
         try {
-        const value = await AsyncStorage.getItem('@favourites')
+        const value = await AsyncStorage.getItem(`@favourites-${uid}`)
         if(value !== null) {
             // kalau ada data-nya
             setFavourites(JSON.parse(value))
@@ -45,15 +47,22 @@ export const FavouritesContextProvider = ({ children }) => {
         setFavourites(newFavourites);
     }
 
-    // load dulu datanya sebelum save 
+    // load dulu datanya sebelum save
+    // ke trigger pada saat ganti user 
     useEffect(() => {
-        loadFavourites();
-    }, []);
+        // jika user ada value dan uid untuk favourites
+        if(user && user.uid) {
+            loadFavourites(user.uid);
+        }
+    }, [user]);
 
     // kalau ada perubahan favourites, ini akan ke trigger
     useEffect(() => {
-        saveFavourites(favourites);
-    }, [favourites]);
+        // jika user ada value, uid dan punya favourites
+        if(user && user.uid && favourites.length) {
+            saveFavourites(favourites, user.uid);
+        }
+    }, [favourites, user]);
 
     return (
         <FavouritesContext.Provider

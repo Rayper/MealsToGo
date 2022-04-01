@@ -6,10 +6,6 @@ import 'react-native-gesture-handler';
 import { useFonts as useOswald, Oswald_400Regular } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
-import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context"
-import { LocationContextProvider } from './src/services/location/location.context'
-import { FavouritesContextProvider } from './src/services/favourites/favourites.context';
-
 import { theme } from "./src/infrastructure/theme";
 
 import firebase from 'firebase/compat';
@@ -50,13 +46,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantsContextProvider>
-                <Navigation />
-              </RestaurantsContextProvider>
-            </LocationContextProvider>
-          </FavouritesContextProvider>
+          <Navigation />
         </AuthenticationContextProvider>  
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
