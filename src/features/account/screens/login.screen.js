@@ -9,9 +9,7 @@ import { AuthenticationContext } from "../../../services/authentication/authenti
 
 export const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
-
     const [password, setPassword] = useState("");
-
     const { onLogin, isLoading, error } = useContext(AuthenticationContext);
 
     return (
