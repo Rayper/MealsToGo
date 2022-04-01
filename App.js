@@ -15,6 +15,7 @@ import { theme } from "./src/infrastructure/theme";
 
 import { initializeApp } from 'firebase/app';
 import firebase from 'firebase/compat';
+import { AuthenticationContextProvider } from './src/services/authentication/authentication.context';
 
 
 // Initialize Firebase
@@ -67,13 +68,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <Navigation />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthenticationContextProvider>  
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
